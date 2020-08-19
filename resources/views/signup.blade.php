@@ -111,19 +111,29 @@
                     </div>
                     <div class="col-8 flex-center">
                         <div class="card card-content h-75 w-100 pl-5 pt-5 pr-3">
-                            <h1 class="text-center font-weight-bold">COMPETITION</h1>
-                            <p class="text-center font-weight-bold pl-5 pr-5">
-                                To celebrate our new stardrink product, we encourage you to join
-                                our stardrink competition. The more entry you have, the higher your
-                                chance to win the prize. <u>The prize is 100 bottles of "stardrink" drink
-                                and only the top 10 persons with the most entries will win the prize.</u>
-                            </p>
-                            @if ($countdown)
-                                <h1 class="text-center">{{$countdown}}</h1>
-                                @else
-                                <a href="/signup"><h1 class="text-center mt-4">REGISTER HERE!</h1></a>
-                                <a href="/check"><p class="text-center">check my entry instead</h3></a>
-                            @endif
+                            <form class="pl-5 pr-5" method="post" action="/store">
+                                <input type = "hidden" name = "_token" value = "<?php echo csrf_token() ?>">
+                                <h1 class="text-center">REGISTRATION</h1>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input type="text" name="fname" class="form-control" placeholder="First Name" required>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" name="lname" class="form-control" placeholder="Last Name">
+                                    </div>
+                                </div>
+                                <div class="form-row mt-2">
+                                    <div class="col">
+                                        <input type="tel" name="phone" class="form-control" placeholder="Phone Number" required>
+                                    </div>
+                                </div>
+                                <div class="form-row mt-2">
+                                    <div class="col">
+                                        <input type="email" name="email" class="form-control" placeholder="Email Address" required>
+                                    </div>
+                                </div>
+                                <input type="submit" value="Sign Up" class="btn btn-warning font-weight-bold mt-2 w-100"/>
+                            </form>
                         </div>
                     </div>
                 </div>

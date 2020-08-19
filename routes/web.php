@@ -11,6 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Competition@index');
+Route::get('/signup', 'Competition@create');
+Route::post('/store', 'Competition@store');
+Route::get('/check', 'Competition@check');
