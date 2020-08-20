@@ -111,11 +111,12 @@
                     </div>
                     <div class="col-8 flex-center">
                         <div class="card card-content h-75 w-100 pl-5 pt-5 pr-3">
-                            <form class="pl-5 pr-5" method="POST" action="#">
-                                <h1 class="text-center">CHECK MY RANK</h1>
+                            <form class="pl-5 pr-5" method="post" action="/show">
+                                <input type = "hidden" name = "_token" value = "<?php echo csrf_token() ?>">
+                                <h1 class="text-center">CHECK MY ENTRY</h1>
                                 <div class="form-row mt-2">
                                     <div class="col">
-                                        <input type="text" class="form-control" placeholder="Email / Phone" required>
+                                        <input type="text" name="input" class="form-control" placeholder="Email / Phone" required>
                                     </div>
                                 </div>
                                 <input type="submit" value="Submit" class="btn btn-warning font-weight-bold mt-2 w-100"/>

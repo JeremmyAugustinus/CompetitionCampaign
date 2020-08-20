@@ -111,32 +111,15 @@
                     </div>
                     <div class="col-8 flex-center">
                         <div class="card card-content h-75 w-100 pl-5 pt-5 pr-3">
-                            <form class="pl-5 pr-5" method="post" action="/store">
-                                <input type = "hidden" name = "_token" value = "<?php echo csrf_token() ?>">
-                                @isset($id)
-                                    <input type = "hidden" name = "ref" value = "<?php echo $id; ?>">
-                                @endisset
-                                <h1 class="text-center">REGISTRATION</h1>
-                                <div class="form-row">
-                                    <div class="col">
-                                        <input type="text" name="fname" class="form-control" placeholder="First Name" required>
-                                    </div>
-                                    <div class="col">
-                                        <input type="text" name="lname" class="form-control" placeholder="Last Name">
-                                    </div>
-                                </div>
-                                <div class="form-row mt-2">
-                                    <div class="col">
-                                        <input type="tel" name="phone" class="form-control" placeholder="Phone Number" required>
-                                    </div>
-                                </div>
-                                <div class="form-row mt-2">
-                                    <div class="col">
-                                        <input type="email" name="email" class="form-control" placeholder="Email Address" required>
-                                    </div>
-                                </div>
-                                <input type="submit" value="Sign Up" class="btn btn-warning font-weight-bold mt-2 w-100"/>
-                            </form>
+                            <h1 class="text-center font-weight-bold">CONGRATULATION</h1>
+                            <p class="text-center font-weight-bold pl-5 pr-5">
+                                We send you an email containing your reference link for this competition.
+                                <u>The more people using your referral link, the more entries you have.</u>
+                                We also provide your reference link on this page, in case you encounter
+                                a problem for accessing your e-mail.
+                                <input type="text" class="form-control text-center mt-4" value="<?php echo "http://127.0.0.1:3000/signup/". $myId; ?>" disabled/>
+                                <a href="/"><button class="btn btn-secondary font-weight-bold mt-2 w-100">Back</button></a>
+                            </p>
                         </div>
                     </div>
                 </div>

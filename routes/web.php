@@ -13,5 +13,7 @@
 
 Route::get('/', 'Competition@index');
 Route::get('/signup', 'Competition@create');
+Route::get('/signup/{id}', ['uses' => 'Competition@createWithId']);
 Route::post('/store', 'Competition@store');
 Route::get('/check', 'Competition@check');
+Route::post('/show', 'Competition@show');

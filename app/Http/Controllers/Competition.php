@@ -2,34 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use Throwable;
-use GuzzleHttp\Client;
 use App\CompetitionCampaign;
 use Illuminate\Http\Request;
 
 class Competition extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display competition page.
      *
      * @return Response
      */
     public function index()
     {
-        try {
-            $client = new Client();
-            $response = $client->request('GET', 'https://timercheck.io/YOURTIMERNAME/');
-            $countdown = json_decode($response->getBody()->getContents())->seconds_remaining;
-            // CarbonInterval::seconds($countdown)->cascade()->forHumans();
-            return view('welcome')->with('countdown',$countdown);
-        } catch (Throwable $e) {
-            $countdown = false;
-            return view('welcome')->with('countdown',$countdown);
-        }
+        $timercheck = new CompetitionCampaign();
+        $callback = $timercheck->index();
+        return view('welcome')->with('countdown', $callback);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new entry.
      *
      * @return Response
      */
@@ -38,64 +29,44 @@ class Competition extends Controller
         return view('signup');
     }
 
+    /**
+     * Show the form for creating a new entry with a reference id.
+     *
+     * @return Response
+     */
+    public function createWithId($id)
+    {
+        return view('signup')->with('id', $id);
+    }
+
     public function check()
     {
         return view('check');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store new entry and update reference if exists.
      *
      * @return Response
      */
     public function store(Request $request)
     {
         $insert = new CompetitionCampaign();
-        $insert->store($request);
-        return redirect('/');
+        $callback = $insert->store($request);
+        // callback untuk kirim email
+        return view('success')->with('myId', $callback);
     }
 
     /**
-     * Display the specified resource.
+     * Display my entry.
      *
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function update($id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
+        $insert = new CompetitionCampaign();
+        $callback = $insert->show($request);
+        return view('show')->with('data', $callback);
     }
 }

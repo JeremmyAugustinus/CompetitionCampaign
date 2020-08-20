@@ -110,33 +110,9 @@
                         <img class="img-fluid star-can ml-3" src="{{URL::asset('/images/star-can.png')}}" alt="new product"/>
                     </div>
                     <div class="col-8 flex-center">
-                        <div class="card card-content h-75 w-100 pl-5 pt-5 pr-3">
-                            <form class="pl-5 pr-5" method="post" action="/store">
-                                <input type = "hidden" name = "_token" value = "<?php echo csrf_token() ?>">
-                                @isset($id)
-                                    <input type = "hidden" name = "ref" value = "<?php echo $id; ?>">
-                                @endisset
-                                <h1 class="text-center">REGISTRATION</h1>
-                                <div class="form-row">
-                                    <div class="col">
-                                        <input type="text" name="fname" class="form-control" placeholder="First Name" required>
-                                    </div>
-                                    <div class="col">
-                                        <input type="text" name="lname" class="form-control" placeholder="Last Name">
-                                    </div>
-                                </div>
-                                <div class="form-row mt-2">
-                                    <div class="col">
-                                        <input type="tel" name="phone" class="form-control" placeholder="Phone Number" required>
-                                    </div>
-                                </div>
-                                <div class="form-row mt-2">
-                                    <div class="col">
-                                        <input type="email" name="email" class="form-control" placeholder="Email Address" required>
-                                    </div>
-                                </div>
-                                <input type="submit" value="Sign Up" class="btn btn-warning font-weight-bold mt-2 w-100"/>
-                            </form>
+                        <div class="card card-content flex-center h-75 w-100 pl-5 pr-3">
+                            <h1 class="text-center font-weight-bold">{{$data[0]->entry}}</h1>
+                            <p class="text-center">ENTRY</p>
                         </div>
                     </div>
                 </div>
