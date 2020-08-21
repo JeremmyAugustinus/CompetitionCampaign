@@ -31,11 +31,17 @@ class Competition extends Controller
     public function create()
     {
         $timercheck = new CompetitionCampaign();
-        $callback = $timercheck->weekPassed();
-        if ($callback) {
-            return view('signup');
+        $countdown = $timercheck->index();
+
+        if ($countdown) {
+            return redirect('/');
         } else {
-            return "Stardrink competition is over. The page has been deleted.";
+            $callback = $timercheck->weekPassed();
+            if ($callback) {
+                return view('signup');
+            } else {
+                return "Stardrink competition is over. The page has been deleted.";
+            }
         }
     }
 
@@ -45,11 +51,17 @@ class Competition extends Controller
     public function createWithId($id)
     {
         $timercheck = new CompetitionCampaign();
-        $callback = $timercheck->weekPassed();
-        if ($callback) {
-            return view('signup')->with('id', $id);
+        $countdown = $timercheck->index();
+
+        if ($countdown) {
+            return redirect('/');
         } else {
-            return "Stardrink competition is over. The page has been deleted.";
+            $callback = $timercheck->weekPassed();
+            if ($callback) {
+                return view('signup')->with('id', $id);
+            } else {
+                return "Stardrink competition is over. The page has been deleted.";
+            }
         }
     }
 
