@@ -1,0 +1,91 @@
+html, body {
+    color: #636b6f;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 200;
+    height: 100vh;
+    margin: 0;
+}
+
+body {
+    background-image: url('/images/stardrink.jpg');
+}
+
+.navbar {
+    background-color: #000;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    width: 100vw;
+    z-index: 2;
+}
+
+.full-height {
+    height: 100vh;
+    background-color: rgba(238, 238, 238, 0.8);
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.position-ref {
+    position: relative;
+}
+
+.form {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+}
+
+.title {
+    font-size: 84px;
+}
+
+.links > a {
+    color: #eee;
+    padding: 0 25px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.m-b-md {
+    margin-bottom: 30px;
+}
+
+.star-can {
+    position: relative;
+    z-index: 1;
+}
+
+.card-content {
+    position: absolute;
+    margin-right: 70px;
+    border-radius: 20px;
+}
+
+@media only screen and (max-width: 1199px) {
+    .card-content { padding-top: 16px !important; }
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.5em; }
+}
+
+@media only screen and (max-width: 991px) {
+    img { display: none; }
+    .card-content {
+        position: relative;
+        margin: 0 !important;
+        padding: 16px 20px !important;
+        height: 100% !important;
+    }
+    .full-height { 
+        position: relative;
+        height: 100vh !important;
+    }
+}

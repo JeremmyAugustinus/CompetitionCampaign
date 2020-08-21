@@ -9,36 +9,53 @@ class Competition extends Controller
 {
     /**
      * Display competition page.
-     *
-     * @return Response
      */
     public function index()
     {
         $timercheck = new CompetitionCampaign();
-        $callback = $timercheck->index();
-        return view('welcome')->with('countdown', $callback);
+        $countdown = $timercheck->index();
+        $expiration = $timercheck->weekPassed();
+        if ($countdown) {
+            return view('welcome')->with('countdown', $countdown);
+        } else if($expiration) {
+            return view('welcome')->with('expiration', $expiration);
+        } else {
+            $timercheck->sendReport();
+            return view('welcome');
+        }
     }
 
     /**
      * Show the form for creating a new entry.
-     *
-     * @return Response
      */
     public function create()
     {
-        return view('signup');
+        $timercheck = new CompetitionCampaign();
+        $callback = $timercheck->weekPassed();
+        if ($callback) {
+            return view('signup');
+        } else {
+            return "Stardrink competition is over. The page has been deleted.";
+        }
     }
 
     /**
      * Show the form for creating a new entry with a reference id.
-     *
-     * @return Response
      */
     public function createWithId($id)
     {
-        return view('signup')->with('id', $id);
+        $timercheck = new CompetitionCampaign();
+        $callback = $timercheck->weekPassed();
+        if ($callback) {
+            return view('signup')->with('id', $id);
+        } else {
+            return "Stardrink competition is over. The page has been deleted.";
+        }
     }
 
+    /**
+     * Form check entry.
+     */
     public function check()
     {
         return view('check');
@@ -46,22 +63,26 @@ class Competition extends Controller
 
     /**
      * Store new entry and update reference if exists.
-     *
-     * @return Response
      */
     public function store(Request $request)
     {
         $insert = new CompetitionCampaign();
-        $callback = $insert->store($request);
-        // callback untuk kirim email
-        return view('success')->with('myId', $callback);
+        $response = $insert->checkData($request);
+        if ($response) {
+            $ref = $request->input('ref');
+            if (isset($ref)) {
+                return redirect('signup/'.$ref)->withErrors(['Try Again: Email or phone is already registered!']);
+            } else {
+                return redirect('signup')->withErrors(['Try Again: Email or phone is already registered!']);
+            }
+        } else {
+            $callback = $insert->store($request);
+            return view('success')->with('myId', $callback);
+        }
     }
 
     /**
      * Display my entry.
-     *
-     * @param  int  $id
-     * @return Response
      */
     public function show(Request $request)
     {
